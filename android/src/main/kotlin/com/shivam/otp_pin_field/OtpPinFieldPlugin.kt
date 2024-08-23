@@ -86,10 +86,9 @@ class OtpPinFieldPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
               it
             )
           }
-        activity?.registerReceiver(
-          broadcastReceiver,
-          IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
-        )
+        val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
+        activity?.registerReceiver(broadcastReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+
         result.success(null)
       }
       "unregisterListener" -> {
